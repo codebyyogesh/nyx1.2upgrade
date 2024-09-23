@@ -352,6 +352,7 @@ exports.deletePerson = async (id) => {
 	return persons
 }
 
+// Update the user email to the database by user ID
 exports.updateUserEmail = async (userId, newEmail) => {
     try {
     // Find the user by ID

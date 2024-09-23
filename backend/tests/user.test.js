@@ -1,5 +1,5 @@
 // tests/user.test.js
-
+// This is a test suite for the User model for testing the user email Id update functionality
 const request = require('supertest');
 const app = require('../server');
 const User = require('../models/User'); // Import the User model
@@ -7,10 +7,10 @@ const mongoose = require('mongoose'); // Import mongoose for cleanup
 const {ROLE} = require('../config/constant')
 
 const jwt = require('jsonwebtoken');
-const JWT_KEY = require("../config/key");
+const JWT_KEY = require('../config/key').JWT_KEY;
 
 function generateTestToken(user) {
-    return jwt.sign({ email: user.email, role: user.role }, 'secret');
+    return jwt.sign({ email: user.email, role: user.role }, JWT_KEY);
 }
 describe('PUT /api/user/me/update-email/:id', () => { // Use the correct route structure
   let userId;

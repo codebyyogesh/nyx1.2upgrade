@@ -84,6 +84,7 @@ exports.deletePerson = async (req, res) => {
     res.status(200).json(persons)
 }
 
+// Update user email (POST /api/user/me/update-email/:id)
 exports.updateEmail = async (req, res) => {
     try{
         const { id } = req.params;
