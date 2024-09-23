@@ -351,3 +351,19 @@ exports.deletePerson = async (id) => {
     let persons = await User.deleteOne({_id: id})
 	return persons
 }
+
+exports.updateUserEmail = async (userId, newEmail) => {
+    try {
+    // Find the user by ID
+            const user = await User.findById(userId);
+            if (!user) {
+                throw new NotFoundError('User not found');
+            }
+            // Update the email
+            user.email = newEmail;
+            await user.save();
+            return user
+    } catch (error) {
+        throw error;
+    }
+};

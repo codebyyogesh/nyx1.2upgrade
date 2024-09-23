@@ -1,7 +1,7 @@
 const UserServices = require('../services/UserServices')
 const { NotFoundError, ValidationError, BadRequestError } = require('../utils/errors')
 const {ROLE} = require('../config/constant')
-
+const validator = require('validator');
 const User = require('../models/User')
 
 // ----------------- Customers ------------------ //
@@ -83,3 +83,18 @@ exports.deletePerson = async (req, res) => {
     const persons = await UserServices.deletePerson(req.params.id)
     res.status(200).json(persons)
 }
+
+exports.updateEmail = async (req, res) => {
+    try{
+        const { id } = req.params;
+        const { email } = req.body; // Extract the new email from the request body
+
+        if (!validator.isEmail(email)) {
+            return res.status(400).json({error: 'Invalid email format'});
+            }
+        const updatedUser = await UserServices.updateUserEmail(id, email);
+        res.status(200).json({  updatedUser });
+    } catch (error) {
+        res.status(500).json({  error: 'Internal server error' });
+    }
+};

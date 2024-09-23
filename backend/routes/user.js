@@ -18,6 +18,11 @@ router.post('/me', AuthMiddleware(ROLE.CUSTOMER), UserController.saveProfile)
 router.put('/me', AuthMiddleware(ROLE.CUSTOMER), UserController.updateProfile)
 router.delete('/me', AuthMiddleware, UserController.deleteProfile)
 
+// New endpoint for updating email address
+
+router.put('/me/update-email/:id', AuthMiddleware(ROLE.CUSTOMER), UserController.updateEmail);
+
+
 // owner
 router.get('/customers', AuthMiddleware(ROLE.OWNER), UserController.getCustomers)
 router.get('/sponsors', AuthMiddleware(ROLE.OWNER), UserController.getSponsors)
